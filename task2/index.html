@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Length Converter</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    h1 {
+      
+      text-align: center;
+      color: white;
+      text-shadow: 2px 2px 4px #000000;
+    
+    }
+
+    .converter {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .converter input[type="number"] {
+      width: 150px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    .converter select {
+      padding: 5px;
+    }
+
+    .converter button {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <img id="background-image" src="bg.png" alt="Background Image">
+  <h1>Length Converter</h1>
+  <div class="converter">
+    <input type="number" id="inputValue">
+    <select id="inputUnit">
+      <option value="m">Meter (m)</option>
+      <option value="cm">Centimeter (cm)</option>
+      <option value="in">Inch (in)</option>
+      <option value="ft">Foot (ft)</option>
+    </select>
+    <button onclick="convertLength()">Convert</button>
+    <select id="outputUnit">
+      <option value="m">Meter (m)</option>
+      <option value="cm">Centimeter (cm)</option>
+      <option value="in">Inch (in)</option>
+      <option value="ft">Foot (ft)</option>
+    </select>
+  </div>
+  <p class="result" id="result"></p>
+
+  <script>
+    function convertLength() {
+      const inputValue = document.getElementById("inputValue").value;
+      const inputUnit = document.getElementById("inputUnit").value;
+      const outputUnit = document.getElementById("outputUnit").value;
+
+      let result;
+
+      if (inputUnit === "m") {
+        if (outputUnit === "cm") {
+          result = inputValue * 100;
+        } else if (outputUnit === "in") {
+          result = inputValue * 39.37;
+        } else if (outputUnit === "ft") {
+          result = inputValue * 3.281;
+        } else {
+          result = inputValue;
+        }
+      } else if (inputUnit === "cm") {
+        if (outputUnit === "m") {
+          result = inputValue / 100;
+        } else if (outputUnit === "in") {
+          result = inputValue / 2.54;
+        } else if (outputUnit === "ft") {
+          result = inputValue / 30.48;
+        } else {
+          result = inputValue;
+        }
+      } else if (inputUnit === "in") {
+        if (outputUnit === "m") {
+          result = inputValue / 39.37;
+        } else if (outputUnit === "cm") {
+          result = inputValue * 2.54;
+        } else if (outputUnit === "ft") {
+          result = inputValue / 12;
+        } else {
+          result = inputValue;
+        }
+      } else if (inputUnit === "ft") {
+        if (outputUnit === "m") {
+          result = inputValue / 3.281;
+        } else if (outputUnit === "cm") {
+          result = inputValue * 30.48;
+        } else if (outputUnit === "in") {
+          result = inputValue * 12;
+        } else {
+          result = inputValue;
+        }
+      }
+
+      document.getElementById("result").textContent = result.toFixed(2);
+    }
+  </script>
+</body>
+</html>
